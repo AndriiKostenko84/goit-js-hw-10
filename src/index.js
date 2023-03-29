@@ -1,18 +1,18 @@
 import './css/styles.css';
-import { CountriesAPI, CountriesAPI } from './fetchCountries';
+import { CountriesAPI} from './fetchCountries';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const DEBOUNCE_DELAY = 300;
 
-const CountriesAPI = new CountriesAPI();
+const countriesAPI = new CountriesAPI();
 
 const inputSearchCountryEl = document.querySelector('#search-box');
-const countryListEl = document.querySelector('#country-list');
-const countryInfoEl = document.querySelector('#country-info');
+const countryListEl = document.querySelector('.country-list');
+const countryInfoEl = document.querySelector('.country-info');
 
 const onSearchCounry = () => {
-    const name = inputCounrySearchEl.value.trim();
+    const name = inputSearchCountryEl.value.trim();
     if (!name) {
         return (countryListEl.innerHTML = ''), (countryInfoEl.innerHTML = '')
     };
@@ -69,11 +69,11 @@ function renderCountryInfo(data) {
 };
 
 function alertWrongName() {
-    Notify.failure(`Oops, there is no country with that name "${inputCounrySearchEl.value.trim()}".`);
+    Notify.failure(`Oops, there is no country with that name "${inputSearchCountryEl.value.trim()}".`);
 }
 
 function alertTooManyMatches() {
     Notify.info('Too many matches found. Please enter a more specific name.');
 }
 
-inputCounrySearchEl.addEventListener('input', debounce(onSearchCounry, DEBOUNCE_DELAY));
+inputSearchCountryEl.addEventListener('input', debounce(onSearchCounry, DEBOUNCE_DELAY));
